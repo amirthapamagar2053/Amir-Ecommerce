@@ -24,6 +24,9 @@ User.init(
     passwordHash: {
       type: DataTypes.STRING,
     },
+    shipping_address: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,

@@ -22,6 +22,9 @@ module.exports = {
       password_hash: {
         type: DataTypes.STRING,
       },
+      shipping_address: {
+        type: DataTypes.STRING,
+      },
     });
   },
   down: async ({ context: queryInterface }) => {

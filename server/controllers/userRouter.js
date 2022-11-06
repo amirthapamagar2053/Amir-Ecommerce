@@ -7,8 +7,8 @@ userRouter.get("/", async (req, res) => {
 
   res.json(users);
 });
-userRouter.get("/:id", async (req, res) => {
-  const user = await User.findOne({ where: { id: req.params.id } });
+userRouter.get("/:email", async (req, res) => {
+  const user = await User.findOne({ where: { email: req.params.email } });
 
   res.json(user);
 });
@@ -49,14 +49,13 @@ userRouter.post("/", async (req, res, next) => {
 
 userRouter.put("/shipping", async (req, res, next) => {
   try {
-    // console.log("the put entered", req.body.shippingAddress);
-    // console.log("the user id is", req.user.id);
-    let user = await User.findOne({ where: { id: req.user.id } });
-    user.shippingAddress = req.body.shippingAddress;
-    user.save();
-    // console.log("the test is", test);
-    // console.log("the update user data is ", req.user);
-    // res.send(req.user);
+    await User.update(
+      {
+        shippingAddress: req.body.shippingAddress,
+      },
+      { where: { id: req.user.id } }
+    );
+    res.send(req.user);
   } catch (error) {
     next(error);
   }

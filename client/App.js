@@ -13,16 +13,15 @@ const App = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const cartItems = useSelector((state) => state.cartItems);
-  const user = window.localStorage.getItem("loggedinUser");
+  // const user = useSelector((state) => state.users);
 
   useEffect(() => {
     // load products in store form backend
-
+    console.log("the useeffect entered");
     dispatch(initializeProducts());
-    if (user) dispatch(initializeCartItems());
-
-    dispatch(setUserObject(JSON.parse(user)));
-  }, [dispatch, user]);
+    dispatch(setUserObject());
+    dispatch(initializeCartItems());
+  }, [dispatch]);
 
   const matchProduct = useMatch("/product/:id");
   const productDetail = matchProduct

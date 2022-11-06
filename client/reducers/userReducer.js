@@ -20,24 +20,34 @@ const userSlice = createSlice({
   },
 });
 
-export const setUserObject = (user) => {
+export const setUserObject = () => {
   return async (dispatch) => {
-    dispatch(setUsers(user));
+    let user = JSON.parse(window.localStorage.getItem("loggedinUser"));
+
+    if (!user) {
+      dispatch(setUsers(null));
+    } else {
+      user = await signUpServices.getOne(user.email);
+
+      dispatch(setUsers(user));
+    }
   };
 };
 
 export const setShippingAddress = (shippingAddress) => {
   return async (dispatch) => {
-    // const users = await userServices.getAll();
-    // // console.log("anecdotes", anecdotes);
-    // const userToUpdate = users.find((user) => user.id === id);
-    // console.log("anecdoteToupdate", anecdoteToUpdate);
     const updatedUser = await shippingServices.add(shippingAddress);
     console.log(updatedUser, "updateduser");
     const updatedContent = await signUpServices.getOne(updatedUser.id);
-    // console.log("THE updated content is", updatedContent);
+    console.log("THE updated content is", updatedContent);
     dispatch(setUserShippingAddress(updatedContent));
-    window.localStorage.setItem("loggedinUser", JSON.stringify(updatedContent));
+    // window.localStorage.setItem(
+    //   "loggedinUser",
+    //   JSON.stringify({
+    //     ...JSON.parse(window.localStorage.getItem("loggedinUser")),
+    //     shippingAddress,
+    //   })
+    // );
   };
 };
 export const { setUsers, setUserShippingAddress } = userSlice.actions;

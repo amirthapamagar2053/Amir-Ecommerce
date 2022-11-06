@@ -24,7 +24,7 @@ User.init(
     passwordHash: {
       type: DataTypes.STRING,
     },
-    shipping_address: {
+    shippingAddress: {
       type: DataTypes.STRING,
     },
   },

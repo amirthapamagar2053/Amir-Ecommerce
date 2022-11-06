@@ -29,6 +29,7 @@ orderDetailRouter.get("/", async (req, res) => {
 
 orderDetailRouter.get("/cart", async (req, res) => {
   try {
+    console.log("the get cart entered");
     const pendingOrder = await Order.findOne({
       where: {
         status: "pending",
@@ -50,6 +51,7 @@ orderDetailRouter.get("/cart", async (req, res) => {
         },
       ],
     });
+    console.log("the cartitems is", cartItems);
     res.send(cartItems);
   } catch (err) {
     res.send(err);

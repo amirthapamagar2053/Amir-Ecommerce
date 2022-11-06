@@ -19,6 +19,7 @@ const cartItemsSlice = createSlice({
 export const initializeCartItems = () => {
   return async (dispatch) => {
     const cartItems = await orderServices.getCartItems();
+    console.log("the initialize cartitems", cartItems);
 
     dispatch(setItems(cartItems));
   };

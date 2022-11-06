@@ -23,7 +23,7 @@ const Products = ({ products }) => {
     <div className="wrapper ">
       <div className=" flex split-center h4"> All Products</div>
       {message ? <div className=" flex split-center ">{message}</div> : null}
-      <div className="gallery">
+      <div className="gallery flex ">
         {products.map((product, index) => {
           return (
             <div key={index} className="content">
